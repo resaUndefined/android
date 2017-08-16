@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from article.views import Home
 
 urlpatterns = [
     url(r'^wetan_omah/', admin.site.urls),
     url(r'^tinymce/',include('tinymce.urls')),
+    url(r'^article/',include('article.urls')),
+    url(r'^$',include('article.urls')),
+    url(r'^$',Home)
 ]
