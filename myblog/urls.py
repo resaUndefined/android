@@ -18,9 +18,9 @@ from django.contrib import admin
 from article.views import Home
 
 urlpatterns = [
+	url(r'^$',Home),
     url(r'^wetan_omah/', admin.site.urls),
     url(r'^tinymce/',include('tinymce.urls')),
     url(r'^article/',include('article.urls')),
-    url(r'^$',include('article.urls')),
-    url(r'^$',Home)
+    url(r'^$',include('article.urls'))
 ]
