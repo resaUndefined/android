@@ -35,8 +35,10 @@ def Home(request):
 def post_detail(request,slug):
 	categori = Category.objects.all()
 	posting = Post.objects.get(slug=slug)
+	cat = Category.objects.get(name=posting.category)
 	data = {
 		'categori' : categori,
+		'cat' : cat,
 		'postDetail' : posting
 	}
 	return render(request, 'single_post.html',data)
