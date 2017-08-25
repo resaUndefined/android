@@ -3,7 +3,7 @@
 {% block navbarAtas %}
   <nav class="blog-nav">
     <a class="blog-nav-item active" href="/">Home</a>
-    <a class="blog-nav-item" href="article/category/">Category</a>
+    <a class="blog-nav-item" href="/article/category/">Category</a>
     <a class="blog-nav-item" href="#">New features</a>
     <a class="blog-nav-item" href="#">Press</a>
     <a class="blog-nav-item" href="#">New hires</a>
@@ -12,20 +12,23 @@
 {% endblock %}
 
 {% block mainContent %}
-  {% for posting in post %}
-    <h2 class="blog-post-title"><a href="article/{{posting.slug}}">{{posting.title}}</a></h2>
-    <p class="blog-post-meta">{{posting.created_on}}, Category <a href="#">{{posting.category}}</a></p>        
-    {{posting.content | safe}}
-  {% endfor %}
+  <h3>List Category</h3>
+            {% for cate in categori %}
+            <h2 class="blog-post-title"><a href="{{cate.id}}">{{cate.name}}</a></h2>
+            <p class="blog-post-meta">{{cate.created_on}}</p>
+            
+            {{cate.description | safe}}
+            {{cate.last_modified}}<hr/>
+            {% endfor %}
 {% endblock %}
 
 {% block CategoryListSide %}
   <ol class="list-unstyled">
       {% for cat in categori %}
-      <li><a href="article/category/{{cat.id}}">{{cat.name}}</a></li>            
+      <li><a href="/article/category/{{cat.id}}">{{cat.name}}</a></li>           
       {% endfor %}      
   </ol>
 {% endblock %}
 {% block backToTop %}
-  <a href="/">Back to top</a>
+  <a href="/article/category/">Back to top</a>
 {% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block navbarAtas %}
+  <nav class="blog-nav">
+    <a class="blog-nav-item active" href="/">Home</a>
+    <a class="blog-nav-item" href="/article/category/">Category</a>
+    <a class="blog-nav-item" href="#">New features</a>
+    <a class="blog-nav-item" href="#">Press</a>
+    <a class="blog-nav-item" href="#">New hires</a>
+    <a class="blog-nav-item" href="#">About</a>
+  </nav>
+{% endblock %}
+
+{% block mainContent %}
+  <h2 class="blog-post-title"><a href="article/category/{{cate.id}}">{{cate.name}}</a></h2>
+  <p class="blog-post-meta">{{cate.created_on}}</p>          
+    {{cate.description | safe}}
+    {{cate.last_modified}}
+  <br>
+  <h3>Daftar Posting yang ada :</h3>
+  <ol>
+    {% for post in postCate %}
+  <li><a href="/article/{{post.slug}}">{{post.title}}</a></li>
+    {% endfor %}
+  </ol>
+{% endblock %}
+
+{% block CategoryListSide %}
+  <ol class="list-unstyled">
+      {% for cat in categori %}
+      <li><a href="/article/category/{{cat.id}}">{{cat.name}}</a></li>
+
+      {% endfor %}      
+  </ol>
+{% endblock %}
+{% block backToTop %}
+  <a href="/article/category/{{cate.id}}">Back to top</a>
+{% endblock %}

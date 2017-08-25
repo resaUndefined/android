@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
+from django.template import RequestContext
 import datetime
+from article.models import Category,Post
 
 
 # Create your views here.
@@ -22,5 +24,40 @@ def Coba(request):
 	return HttpResponse(html)
 
 def Home(request):
-	return render(request, 'index.html')
+	categori = Category.objects.all()
+	post = Post.objects.all().order_by('-created_on')[:3]
+	data = {
+		'categori' : categori,
+		'post' : post
+	}
+	return render(request, 'index.html',data)
+
+def post_detail(request,slug):
+	categori = Category.objects.all()
+	posting = Post.objects.get(slug=slug)
+	cat = Category.objects.get(name=posting.category)
+	data = {
+		'categori' : categori,
+		'cat' : cat,
+		'postDetail' : posting
+	}
+	return render(request, 'single_post.html',data)
+
+def category_list(request):
+	categori = Category.objects.all()
+	data = {
+			'categori' : categori,
+	}
+	return render(request,'category.html',data)
+
+def category_detail(request,id):
+	categori = Category.objects.get(id=id)
+	cateList = Category.objects.all()
+	posting = Post.objects.filter(category=categori)
+	cate_list = {
+		'categori' : cateList,
+		'postCate' : posting,
+		'cate' : categori
+	}
+	return render(request,'category_detail.html',cate_list)
 
