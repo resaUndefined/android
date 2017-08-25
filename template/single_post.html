@@ -16,7 +16,7 @@
             <p class="blog-post-meta">{{postDetail.created_on}}, Category <a href="/article/category/{{cat.id}}">{{postDetail.category}}</a></p>
             
             {{postDetail.content | safe}}
-            <img src="media/post_image/{{postDetail.image}}" alt="ini gambar {{postDetail.title}}">
+            <img src="/media/{{postDetail.image}}" alt="ini gambar {{postDetail.title}}">
 {% endblock %}
 
 {% block CategoryListSide %}
