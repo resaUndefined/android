@@ -8,6 +8,7 @@
     <a class="blog-nav-item" href="#">Press</a>
     <a class="blog-nav-item" href="#">New hires</a>
     <a class="blog-nav-item" href="#">About</a>
+    <a class="blog-nav-item" href="/login/">Login</a>
   </nav>
 {% endblock %}
 
@@ -16,7 +17,7 @@
             <p class="blog-post-meta">{{postDetail.created_on}}, Category <a href="/article/category/{{cat.id}}">{{postDetail.category}}</a></p>
             
             {{postDetail.content | safe}}
-            <img src="/media/{{postDetail.image}}" alt="ini gambar {{postDetail.title}}">
+            <img src="/media/{{postDetail.image}}" width="100%" alt="ini gambar {{postDetail.title}}">
 {% endblock %}
 
 {% block CategoryListSide %}

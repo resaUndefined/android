@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^category/(?P<id>[0-9]+)$',views.category_detail),
     url(r'^category/$',views.category_list),
     url(r'^(?P<slug>[\w-]+)$',views.post_detail),
-
+   
 ]

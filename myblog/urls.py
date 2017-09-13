@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from article.views import Home
+from article.views import Home,LoginView,LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^wetan_omah/', admin.site.urls),
     url(r'^tinymce/',include('tinymce.urls')),
     url(r'^article/',include('article.urls')),
-    url(r'^$',include('article.urls'))
+    url(r'^$',include('article.urls')),
+    url(r'^login/$',LoginView),
+    url(r'^logout/$',LogoutView),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

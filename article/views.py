@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render,render_to_response,redirect
 from django.http import HttpResponse
 from django.template import RequestContext
 import datetime
 from article.models import Category,Post
-
+from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def Myview(request):
@@ -26,12 +27,15 @@ def Coba(request):
 def Home(request):
 	categori = Category.objects.all()
 	post = Post.objects.all().order_by('-created_on')[:3]
+	#idCate = post.category.id
 	data = {
 		'categori' : categori,
+	#	'idCate' : idCate,
 		'post' : post
 	}
 	return render(request, 'index.html',data)
 
+@login_required(login_url='/login/')
 def post_detail(request,slug):
 	categori = Category.objects.all()
 	posting = Post.objects.get(slug=slug)
@@ -60,4 +64,23 @@ def category_detail(request,id):
 		'cate' : categori
 	}
 	return render(request,'category_detail.html',cate_list)
+
+def LoginView(request):
+	data = {}
+	if request.POST:
+		username = request.POST.get('uname')
+		password = request.POST.get('pass')
+		is_auth = authenticate(username=username,password=password)
+		if is_auth is not None:
+			login(request,is_auth)
+			return redirect('/')
+		else:
+			print "gagal login, silakan cek username dan password anda"
+	return render(request,'login.html')
+
+
+def LogoutView(request):
+	logout(request)
+	return redirect('/')
+
 

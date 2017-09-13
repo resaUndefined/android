@@ -43,6 +43,11 @@
           <a class="blog-nav-item" href="#">Press</a>
           <a class="blog-nav-item" href="#">New hires</a>
           <a class="blog-nav-item" href="#">About</a>
+          {% if request.user.is_authenticated %}
+          <a class="blog-nav-item" href="/login/">Logout</a>
+          {% else %}
+          <a class="blog-nav-item" href="login/">Login</a>
+          {% endif %}
         </nav>
         {% endblock %}
       </div>
@@ -71,20 +76,25 @@
           </div><!-- /.blog-post -->
 
           <nav>
+          {% block konten %}
             <ul class="pager">
               <li><a href="#">Previous</a></li>
               <li><a href="#">Next</a></li>
             </ul>
+          {% endblock %}
           </nav>
 
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        {% block about %}
+        {% if request.user.is_authenticated %}
           <div class="sidebar-module sidebar-module-inset">
-            <h4>About Undefined</h4>
+            <h4>About {{request.user}}</h4>
             <p>I'am noob <em>i have a big dream</em> you know, what can i do to get my dream comes true ?. Yes, alright, i have to do what i think and keep spirit to do it, because dreaming is nothing without doing :v. MasrayUndefined</p>
           </div>
-
+          {% endif %}
+          {% endblock %}
           <div class="sidebar-module">
             <h4>Category</h4>
             {% block CategoryListSide %}

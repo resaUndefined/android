@@ -3,27 +3,35 @@
 {% block navbarAtas %}
   <nav class="blog-nav">
     <a class="blog-nav-item active" href="/">Home</a>
-    <a class="blog-nav-item" href="article/category/">Category</a>
+    <a class="blog-nav-item" href="/article/category/">Category</a>
     <a class="blog-nav-item" href="#">New features</a>
     <a class="blog-nav-item" href="#">Press</a>
     <a class="blog-nav-item" href="#">New hires</a>
     <a class="blog-nav-item" href="#">About</a>
-    {% if request.user.is_authenticated %}
-          <a class="blog-nav-item" href="/logout/">Logout</a>
-          {% else %}
-          <a class="blog-nav-item" href="login/">Login</a>
-          {% endif %}
+    <a class="blog-nav-item" href="/login/">Login</a>
   </nav>
 {% endblock %}
-
-
 
 {% block mainContent %}
   {% for posting in post %}
     <h2 class="blog-post-title"><a href="article/{{posting.slug}}">{{posting.title}}</a></h2>
-    <p class="blog-post-meta">{{posting.created_on}}, Category <a href="article/category/{{posting.category_id}}">{{posting.category}}</a></p>        
+    <p class="blog-post-meta">{{posting.created_on}}, Category <a href="#">{{posting.category}}</a></p>        
     {{posting.content | safe}}
   {% endfor %}
+{% endblock %}
+{% block konten %}
+  <form method="POST" action="">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Username</label>
+    <input type="text" class="form-control" id="uname" placeholder="Username" name="uname">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="pass" placeholder="Password" name="pass">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
 {% endblock %}
 
 {% block CategoryListSide %}
